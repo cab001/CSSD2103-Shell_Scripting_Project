@@ -15,5 +15,5 @@ permission_check() {
 }
 
 find_image() {
-  find "$1" \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.tif" -o -iname "*.tiff" -o -iname "*.bmp" -o -iname "*.gif" \)
+  find "$1" \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.tif" -o -iname "*.tiff" -o -iname "*.bmp" -o -iname "*.gif" \)
 }
