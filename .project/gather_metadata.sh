@@ -2,13 +2,15 @@
 
 is_directory() {
   if [[ ! -d "$1" ]]; then
-    echo "$1 is not a directory."
+    echo "$1 is not a directory.">&2
+    exit 1
   fi
 }
 
 permission_check() {
   if [[ ! -r "$1" || ! -x "$1" ]]; then
-    echo "$1 is not readable or executable."
+    echo "$1 is not readable or executable.">&2
+    exit 1
   fi
 }
 
