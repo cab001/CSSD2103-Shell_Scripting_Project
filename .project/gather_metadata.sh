@@ -1,16 +1,6 @@
 #! /usr/bin/env bash
 
-set_directory() {
-  # if no arguements given, current working directory is selected
-  if [ $# -eq 0 ] ; then
-    searchDir=./
-
-  # else if 1 is given, that will be the current working directory
-  elif [ $# -eq 1 ] ; then
-    searchDir="$1"
-  fi
-}
-
+# Katie Lui and Chloe Balan
 
 is_directory() {
   if [[ ! -d "$1" ]]; then
@@ -79,5 +69,37 @@ create_thumbnails() {
 
   # creating the metadata file for the given image
   identify -verbose $image > .metadata/"$image".txt
-
 }
+
+# main program
+
+# if no arguements given, current working directory is selected
+  if [ $# -eq 0 ] ; then
+    searchDir=./
+
+  # else if 1 is given, that will be the current working directory
+  elif [ $# -eq 1 ] ; then
+    searchDir="$1"
+
+    is_directory "$searchDir"
+
+    permission_check "$searchDir"
+
+  else
+    echo "too many arguments" # just here for testing purposes, delete later
+  fi
+
+  images=$(find_image "$searchDir")
+
+  # for number of items found with find, create thumbnail and metadata stuff for each?
+  num_of_images=$( ( find_image "searchDir" ) | wc -l )
+
+  # maybe use cut to select section to use (delim w newline) and increase the section number each time?
+  for "image" in images ; do
+    cd "$(dirname "image")"
+    create_thumbnails "image"
+  done
+
+
+
+
