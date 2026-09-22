@@ -74,6 +74,8 @@ create_thumbnails() {
 # main program
 
 # if no arguements given, current working directory is selected
+  searchDir=./
+
   if [ $# -eq 0 ] ; then
     searchDir=./
 
@@ -92,12 +94,12 @@ create_thumbnails() {
   images=$(find_image "$searchDir")
 
   # for number of items found with find, create thumbnail and metadata stuff for each?
-  num_of_images=$( ( find_image "searchDir" ) | wc -l )
+  num_of_images=$( ( find_image "$searchDir" ) | wc -l )
 
   # maybe use cut to select section to use (delim w newline) and increase the section number each time?
   for "image" in images ; do
-    cd "$(dirname "image")"
-    create_thumbnails "image"
+    cd "$(dirname "$image")"
+    create_thumbnails "$image"
   done
 
 
